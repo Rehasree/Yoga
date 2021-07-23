@@ -16,13 +16,12 @@ else
 return str;  
 }
 const PostEvent=({ currentID, setCurrentId })=>{
-    const Profile=(JSON.parse(localStorage.getItem('profile')))
-    const creator= Profile?.result.givenName
+    const user=(JSON.parse(localStorage.getItem('profile')))
     let query = useLocation().search;
     let id = subStrAfterChars(query, '=','b')
     setCurrentId(id);
     const post = useSelector((state)=> currentID ? state.posts.find((p)=>p._id===currentID):null);
-    const [postData, setPostData] = useState({creator:creator, name: '', eventDate: '', message: '', phone: '',eventType:' ', selectedFile: '' });
+    const [postData, setPostData] = useState({ name: '', eventDate: '', message: '', phone: '',eventType:' ', selectedFile: '' });
     const dispatch = useDispatch();
     const classes = useStyles();  
 
@@ -32,13 +31,19 @@ const PostEvent=({ currentID, setCurrentId })=>{
     const handleSubmit = async (e) => {
     e.preventDefault();
     if (!currentID) {
-        dispatch(createPost(postData)); 
+        dispatch(createPost({...postData,creatorName:user?.result.name})); 
     } else {
-        dispatch(updatePost(currentID, postData));        
+        dispatch(updatePost(currentID, {postData,creatorName:user?.result.name}));        
     }
     window.location.href = ('http://localhost:3000/');
     };
-    console.log(postData)
+    if(!user){
+        return(
+        <div  style={{marginTop:"200px"}} >
+            <h3 align="center">Please signin to create your auth memories</h3>
+        </div>
+        )
+    }
     return(
         <div className="event-form ">
             <Container>

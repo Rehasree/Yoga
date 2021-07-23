@@ -9,10 +9,9 @@ const Anniversaries=({currentID,setCurrentId})=>{
     const posts = useSelector((state)=> state.posts);
     let isCreator=false;
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
-    const currentUser=user?.result.givenName;
+    const currentUser=user?.result.name;
     
     const dispatch = useDispatch();
-    console.log("Posts in posts",posts);
     return(
         <div> 
         {!posts.length ? <div align="center" style={{marginTop:"300px"}}> < CircularProgress /> </div>:(
@@ -21,7 +20,7 @@ const Anniversaries=({currentID,setCurrentId})=>{
                 <Row>
                     {posts.filter(post=>post.eventType==="anniversary").map(post=>(
                        <Col xl={4} md={6}>
-                        {(post.creator===currentUser)?(isCreator=true):(isCreator=false)}
+                        {(post.creatorName===currentUser)?(isCreator=true):(isCreator=false)}
                         <AnniversaryCard 
                         Update={()=>{ window.location.href = ('http://localhost:3000/post-events?id=' + post._id);}}
                         Delete={()=>{ dispatch(deletePost(post._id));}}
@@ -34,12 +33,12 @@ const Anniversaries=({currentID,setCurrentId})=>{
                         img={post.selectedFile} 
                         desc={post.message} 
                         eventType={post.eventType} 
-                        likes={post.likeCount} 
+                        likes={post.likes.length} 
                         eventStartDate={post.eventDate} 
                         time={moment(post.createdAt).fromNow()}
                         setCurrentId={setCurrentId}
                         phone={post.phone}
-                        creator={post.creator}
+                        creator={post.creatorName}
                         isCreator={isCreator}
                         />
                    </Col> 

@@ -2,7 +2,6 @@ import React,{useState,useEffect} from 'react';
 import {Navbar,Container,Nav} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './navbar.css';
-import useStyles from './styles';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {  Avatar, Button } from '@material-ui/core';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -21,7 +20,6 @@ const Navbarr=()=>{
       };
     useEffect(() => {
     const token = user?.token;
-
     if (token) {
         const decodedToken = decode(token);
 
@@ -42,12 +40,10 @@ const Navbarr=()=>{
                 <Nav.Link  href="/"><p className="navlink">Home</p></Nav.Link>
                 <Nav.Link  href="/anniversaries"><p className="navlink">Anniversaries</p></Nav.Link>
                 <Nav.Link  href="/birthdays"><p className="navlink">Birthday's</p></Nav.Link>
-                
+                <Nav.Link eventKey={2} href="/post-events"><p className="navlink"> Post events</p></Nav.Link>
                 {user?.result ? (
                     <>
-                    <Nav.Link eventKey={2} href="/post-events">
-                        <p className="navlink"> Post events</p>
-                    </Nav.Link>
+                    
                     <Nav.Link >
                         <Avatar    alt={user?.result.name} src={user?.result.imageUrl}>{user?.result.name.charAt(0)}</Avatar>
                     </Nav.Link>

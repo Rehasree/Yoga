@@ -1,5 +1,8 @@
 import mongoose from 'mongoose';
 import postEvent  from '../models/postEvents.js'
+import express from 'express'
+
+const router = express.Router();
 export const  getPosts = async (req,res)=>{
     try {
        const postEvents = await postEvent.find(); 
@@ -11,7 +14,7 @@ export const  getPosts = async (req,res)=>{
 
 export const createPosts=async (req,res)=>{
     const post = req.body;
-    const newPost = new postEvent(post);
+    const newPost = new postEvent({ ...post, creator: req.userId, createdAt: new Date().toISOString()});
    try {
        await newPost.save();
        res.status(201).json(newPost)
@@ -35,8 +38,22 @@ export const deletePost = async(req,res)=>{
 }
 
 export const likePost = async(req,res)=>{
-    const { id } = req.params;  
+    const { id } = req.params; 
+    if(!req.userId) return res.json({message:"User unauthenticaled"})
     const post = await postEvent.findById(id);
-    const updatedPost = await postEvent.findByIdAndUpdate( id,{ likeCount : post.likeCount+1 },{ new:true } )
+    const index = post.likes.findIndex((id)=>id===String(req.userId));
+
+    if(index===-1){
+        //like post
+        post.likes.push(req.userId)
+    }else{
+        //dislike
+        post.likes=post.likes.filter((id)=>id!==String(req.userId))
+
+    }
+
+    const updatedPost = await postEvent.findByIdAndUpdate( id,post,{ new:true } )
     res.json(updatedPost);
 }
+
+export default router;

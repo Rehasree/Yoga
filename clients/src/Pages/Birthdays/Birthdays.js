@@ -10,7 +10,7 @@ const Birthdays=({currentID,setCurrentId})=>{
     let isCreator=false;
     const dispatch = useDispatch();
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
-    const currentUser=user?.result.givenName;
+    const currentUser=user?.result.name;
     
     return(
         <div> 
@@ -21,7 +21,7 @@ const Birthdays=({currentID,setCurrentId})=>{
                     {posts.filter(post=>post.eventType==="birthday").map(post=>{
                       return(
                        <Col xl={4} md={6}>
-                        {(post.creator===currentUser)?(isCreator=true):(isCreator=false)}
+                        {(post.creatorName===currentUser)?(isCreator=true):(isCreator=false)}
                         <AnniversaryCard 
                         Update={()=>{ window.location.href = ('http://localhost:3000/post-events?id=' + post._id);}}
                         Delete={()=>{ dispatch(deletePost(post._id));}}
@@ -38,7 +38,7 @@ const Birthdays=({currentID,setCurrentId})=>{
                         time={moment(post.createdAt).fromNow()}
                         setCurrentId={setCurrentId}
                         phone={post.phone}
-                        creator={post.creator}
+                        creator={post.creatorName}
                         isCreator={isCreator}
                         />
                    </Col> 
