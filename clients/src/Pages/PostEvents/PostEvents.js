@@ -85,7 +85,8 @@ const PostEvent=({ currentID, setCurrentId })=>{
             <select className="form-control form-control-lg" name="eventType" value={postData.eventType} onChange={(e) => setPostData({ ...postData, eventType: e.target.value })} >
                 <option value="" >Event type</option>
                 <option value="anniversary">Anniversary</option>
-                <option value="birthday">Birthday</option>
+                <option value="adultBirthday">Adult Birthday</option>
+                <option value="babyBirthday">Baby Birthday</option>
             </select>
             </Col>
            </Row>

@@ -5,20 +5,21 @@ import {CircularProgress} from '@material-ui/core';
 import moment from 'moment';
 import AnniversaryCard from '../../Components/constants/cards/celebration/Card'
 import { deletePost ,likePost } from '../../actions/posts';
-const Anniversaries=({currentID,setCurrentId})=>{
+const Babybirthdays=({currentID,setCurrentId})=>{
     const posts = useSelector((state)=> state.posts);
     let isCreator=false;
+    const dispatch = useDispatch();
     const user = (JSON.parse(localStorage.getItem('profile')));
     const currentUser=user?.result.name;
     
-    const dispatch = useDispatch();
     return(
         <div> 
-        {!posts.length ? <div align="center" style={{marginTop:"300px"}}> < CircularProgress /> </div>:(
+            {!posts.length ? <div align="center" style={{marginTop:"300px"}}> < CircularProgress /> </div>:(
             <Container>
-                <h2 style={{margin:"20px"}} >Anniversaries</h2> 
+                <h2 style={{margin:"20px"}} >Babies Birthday's</h2> 
                 <Row>
-                    {posts.filter(post=>post.eventType==="anniversary").map(post=>(
+                    {posts.filter(post=>post.eventType==="babyBirthday").map(post=>{
+                      return(
                        <Col xl={4} md={6}>
                         {(post.creatorName===currentUser)?(isCreator=true):(isCreator=false)}
                         <AnniversaryCard 
@@ -27,7 +28,6 @@ const Anniversaries=({currentID,setCurrentId})=>{
                         Like={()=>{
                             dispatch(likePost(post._id)) 
                             }}
-
                         id={post._id}
                         name={post.name} 
                         img={post.selectedFile} 
@@ -42,7 +42,7 @@ const Anniversaries=({currentID,setCurrentId})=>{
                         isCreator={isCreator}
                         />
                    </Col> 
-                    ))}
+                    )})}
                     
                 </Row>
             </Container>
@@ -51,4 +51,4 @@ const Anniversaries=({currentID,setCurrentId})=>{
     )
 }
 
-export default Anniversaries;
+export default Babybirthdays;

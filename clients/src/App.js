@@ -13,7 +13,8 @@ import { getPosts  } from './actions/posts';
 import Base from './Components/constants/Base/Base';
 import Home from './Pages/Home/home'
 import Anniversaries from './Pages/Anniversaries/Anniversaries'
-import  Birthdays from './Pages/Birthdays/Birthdays'
+import  Babybirthdays from './Pages/Birthdays/BabyBirthdays';
+import Adultbirthdays from './Pages/Birthdays/AdultBirthDays';
 import PostEvent  from './Pages/PostEvents/PostEvents';
 import Authentication from './Pages/Auth/Auth';
 
@@ -37,9 +38,14 @@ function App() {
               <Anniversaries currentID={currentID} setCurrentId={setCurrentId}/>
           </Base>
           </Route>
-          <Route exact path="/birthdays">
+          <Route exact path="/baby-birthdays">
           <Base> 
-              <Birthdays  currentID={currentID} setCurrentId={setCurrentId}/>
+              <Babybirthdays  currentID={currentID} setCurrentId={setCurrentId}/>
+          </Base>
+          </Route>
+          <Route exact path="/adult-birthdays">
+          <Base> 
+              <Adultbirthdays  currentID={currentID} setCurrentId={setCurrentId}/>
           </Base>
           </Route>
           <Route exact path="/post-events" >

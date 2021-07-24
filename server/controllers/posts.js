@@ -26,10 +26,9 @@ export const createPosts=async (req,res)=>{
 export const updatePost = async(req,res)=>{
     const { id } = req.params;  
     const post = req.body;
-    const final = await postEvent.findByIdAndUpdate({_id:id},{...post,id},{new:true});
+    const final = await postEvent.findByIdAndUpdate(id,post.postData ,{new:true});
     res.status(200).json(final);
 }
-
 
 export const deletePost = async(req,res)=>{
     const { id } = req.params;  
@@ -44,9 +43,11 @@ export const likePost = async(req,res)=>{
     const index = post.likes.findIndex((id)=>id===String(req.userId));
 
     if(index===-1){
+
         //like post
         post.likes.push(req.userId)
     }else{
+       
         //dislike
         post.likes=post.likes.filter((id)=>id!==String(req.userId))
 

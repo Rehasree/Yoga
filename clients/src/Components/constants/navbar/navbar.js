@@ -39,7 +39,9 @@ const Navbarr=()=>{
                 <Nav>
                 <Nav.Link  href="/"><p className="navlink">Home</p></Nav.Link>
                 <Nav.Link  href="/anniversaries"><p className="navlink">Anniversaries</p></Nav.Link>
-                <Nav.Link  href="/birthdays"><p className="navlink">Birthday's</p></Nav.Link>
+                <Nav.Link  href="/baby-birthdays"><p className="navlink">Babies Birthdays</p></Nav.Link>
+                <Nav.Link  href="/adult-birthdays"><p className="navlink">Adults Birthdays</p></Nav.Link>
+
                 <Nav.Link eventKey={2} href="/post-events"><p className="navlink"> Post events</p></Nav.Link>
                 {user?.result ? (
                     <>

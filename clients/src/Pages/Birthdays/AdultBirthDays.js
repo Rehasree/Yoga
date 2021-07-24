@@ -1,24 +1,24 @@
-import React,{useState} from 'react';
+import React from 'react';
 import { useSelector, useDispatch} from 'react-redux';
 import {Container,Row,Col} from 'react-bootstrap';
 import {CircularProgress} from '@material-ui/core';
 import moment from 'moment';
 import AnniversaryCard from '../../Components/constants/cards/celebration/Card'
 import { deletePost ,likePost } from '../../actions/posts';
-const Birthdays=({currentID,setCurrentId})=>{
+const Adultbirthdays=({currentID,setCurrentId})=>{
     const posts = useSelector((state)=> state.posts);
     let isCreator=false;
     const dispatch = useDispatch();
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+    const user = (JSON.parse(localStorage.getItem('profile')));
     const currentUser=user?.result.name;
     
     return(
         <div> 
             {!posts.length ? <div align="center" style={{marginTop:"300px"}}> < CircularProgress /> </div>:(
             <Container>
-                <h2 style={{margin:"20px"}} >Birthday's</h2> 
+                <h2 style={{margin:"20px"}} >Adults Birthday's</h2> 
                 <Row>
-                    {posts.filter(post=>post.eventType==="birthday").map(post=>{
+                    {posts.filter(post=>post.eventType==="adultBirthday").map(post=>{
                       return(
                        <Col xl={4} md={6}>
                         {(post.creatorName===currentUser)?(isCreator=true):(isCreator=false)}
@@ -33,7 +33,7 @@ const Birthdays=({currentID,setCurrentId})=>{
                         img={post.selectedFile} 
                         desc={post.message} 
                         eventType={post.eventType} 
-                        likes={post.likeCount} 
+                        likes={post.likes.length} 
                         eventStartDate={post.eventDate} 
                         time={moment(post.createdAt).fromNow()}
                         setCurrentId={setCurrentId}
@@ -51,4 +51,4 @@ const Birthdays=({currentID,setCurrentId})=>{
     )
 }
 
-export default Birthdays;
+export default Adultbirthdays;
