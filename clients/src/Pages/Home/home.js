@@ -1,6 +1,8 @@
 import React from 'react'
+import moment from "moment";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
+import { useSelector} from 'react-redux';
 import Fade from 'react-reveal/Fade';
 import { Row,Container,Col} from 'react-bootstrap';
 import './home.css'
@@ -11,6 +13,10 @@ import about from './images/aboutUs.jpeg'
 import Slider from "react-slick";
 import FormatQuoteIcon from '@material-ui/icons/FormatQuote';
 const Home=()=>{
+    var babyBirthdayToday=[];
+    var adultsBirthdayToday=[];
+    var anniversariesToday=[];
+    var today = moment().format('YYYY-MM-DD')
     // Testimonials
     var settings = {
         dots: true,
@@ -29,7 +35,23 @@ const Home=()=>{
         {name:"Sent",desc:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer bibendum enim eu nibh finibus Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer bibendum enim eu nibh finibus "},
         
     ]
-   
+//    WINNER DESICION
+const posts = useSelector((state)=> state.posts);
+posts.map(post=>{
+    if(post.eventDate===today && post.eventType==="babyBirthday"){
+            babyBirthdayToday.push(post)
+    }
+    if(post.eventDate===today && post.eventType==="adultBirthday"){
+        adultsBirthdayToday.push(post)
+    }
+    if(post.eventDate===today && post.eventType==="anniversary"){
+        anniversariesToday.push(post)
+    }
+})
+const babyWinner= babyBirthdayToday?.sort((a,b)=>b.likes.length-a.likes.length)[0];
+const adultWinner = adultsBirthdayToday?.sort((a,b)=>b.likes.length-a.likes.length)[0];
+const anniversaryWinner = anniversariesToday?.sort((a,b)=>b.likes.length-a.likes.length)[0];
+console.log(posts)
     return(
         <div align="center">
             <Carousel>
@@ -46,6 +68,7 @@ const Home=()=>{
                     {/* <p className="legend">Legend 3</p> */}
                 </div>
             </Carousel>
+           
             <div className="about">
                 <Container>
                 <Fade clear>  
@@ -92,70 +115,65 @@ const Home=()=>{
                 <Container>
                     <h2>Winners of the day</h2>
                     <ul className="cards">
-                        <li>
+                     {babyWinner && ( <li>
                             <a href="/" className="card">
-                            <img src="https://i.imgur.com/oYiTqum.jpg" className="card__image" alt="" />
+                            <img src={babyWinner?.selectedFile} className="card__image" alt="" />
                             <div className="card__overlay">
                                 <div className="card__header">
                                 <svg className="card__arc" xmlns="http://www.w3.org/2000/svg"><path /></svg>                     
-                                <img className="card__thumb" src="https://i.imgur.com/7D7I6dI.png" alt="" />
+                                <img className="card__thumb" src="https://t3.ftcdn.net/jpg/02/82/23/94/360_F_282239447_9JUkxLmUPzBvOrEAXVEx2GpNd1EkPOSO.jpg" alt="" />
                                 <div className="card__header-text">
-                                    <h3 className="card__title">Jessica Parker</h3>            
-                                    <span className="card__status">1 hour ago</span>
+                                    <h3 className="card__title">{babyWinner?.name}</h3>            
+                                    <span className="card__status">BABIES WINNER</span>
                                 </div>
                                 </div>
-                                <p className="card__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, blanditiis?</p>
+                                <p className="card__description">
+                                    My heartiest congrats to the most devoted and dedicated competitor. Congrats and good luck with that!
+                                </p>
                             </div>
                             </a>      
-                        </li>
-                        <li>
-                            <a href="/" className="card">
-                            <img src="https://i.imgur.com/2DhmtJ4.jpg" className="card__image" alt="" />
-                            <div className="card__overlay">        
-                                <div className="card__header">
-                                <svg className="card__arc" xmlns="http://www.w3.org/2000/svg"><path /></svg>                 
-                                <img className="card__thumb" src="https://i.imgur.com/sjLMNDM.png" alt="" />
-                                <div className="card__header-text">
-                                    <h3 className="card__title">kim Cattrall</h3>
-                                    <span className="card__status">3 hours ago</span>
-                                </div>
-                                </div>
-                                <p className="card__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, blanditiis?</p>
-                            </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/" className="card">
-                            <img src="https://i.imgur.com/oYiTqum.jpg" className="card__image" alt="" />
-                            <div className="card__overlay">
-                                <div className="card__header">
-                                <svg className="card__arc" xmlns="http://www.w3.org/2000/svg"><path /></svg>                     
-                                <img className="card__thumb" src="https://i.imgur.com/7D7I6dI.png" alt="" />
-                                <div className="card__header-text">
-                                    <h3 className="card__title">Jessica Parker</h3>   
-                                    <span className="card__status">1 hour ago</span>
-                                </div>
-                                </div>
-                                <p className="card__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, blanditiis?</p>
-                            </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/" className="card">
-                            <img src="https://i.imgur.com/2DhmtJ4.jpg" className="card__image" alt="" />
-                            <div className="card__overlay">
-                                <div className="card__header">
-                                <svg className="card__arc" xmlns="http://www.w3.org/2000/svg"><path /></svg>                 
-                                <img className="card__thumb" src="https://i.imgur.com/sjLMNDM.png" alt="" />
-                                <div className="card__header-text">
-                                    <h3 className="card__title">kim Cattrall</h3>
-                                    <span className="card__status">3 hours ago</span>
-                                </div>          
-                                </div>
-                                <p className="card__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, blanditiis?</p>
-                            </div>
-                            </a>
-                        </li>    
+                        </li>)}   
+                      {adultWinner &&(
+                          <li>
+                          <a href="/" className="card">
+                          <img src={adultWinner.selectedFile} className="card__image" alt="" />
+                          <div className="card__overlay">        
+                              <div className="card__header">
+                              <svg className="card__arc" xmlns="http://www.w3.org/2000/svg"><path /></svg>                 
+                              <img className="card__thumb" src="https://t3.ftcdn.net/jpg/02/82/23/94/360_F_282239447_9JUkxLmUPzBvOrEAXVEx2GpNd1EkPOSO.jpg" alt="" />
+                              <div className="card__header-text">
+                                  <h3 className="card__title">{adultWinner.name}</h3>
+                                  <span className="card__status">ADULTS WINNER</span>
+                              </div>
+                              </div>
+                              <p className="card__description">
+                                    My heartiest congrats to the most devoted and dedicated competitor. Congrats and good luck with that!
+                                </p>
+                          </div>
+                          </a>
+                      </li>
+                     
+                      )} 
+                       {anniversaryWinner &&(
+                           <li>
+                           <a href="/" className="card">
+                           <img src={anniversaryWinner.selectedFile} className="card__image" alt="" />
+                           <div className="card__overlay">
+                               <div className="card__header">
+                               <svg className="card__arc" xmlns="http://www.w3.org/2000/svg"><path /></svg>                 
+                               <img className="card__thumb" src="https://t3.ftcdn.net/jpg/02/82/23/94/360_F_282239447_9JUkxLmUPzBvOrEAXVEx2GpNd1EkPOSO.jpg" alt="" />
+                               <div className="card__header-text">
+                                   <h3 className="card__title">{anniversaryWinner.name}</h3>
+                                   <span className="card__status">ANNIVERSARIES WINNER</span>
+                               </div>          
+                               </div>
+                               <p className="card__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, blanditiis?</p>
+                           </div>
+                           </a>
+                       </li>    
+                  
+                       )} 
+                        
                     </ul>
                 </Container>    
             </div>   
