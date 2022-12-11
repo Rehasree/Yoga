@@ -1,6 +1,11 @@
 .about{
     padding: 20px;
 }
+.about p{
+  text-align: initial !important;
+  font-size: 17px;
+  font-family: 'Robot';
+}
  h2{
     font-size: 34px;
   padding: 0 0 0 8px;
@@ -84,6 +89,7 @@
 
 .card__image {      
   width: 100%;
+  
   height: auto;
 }
 

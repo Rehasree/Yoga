@@ -1,21 +1,12 @@
 import mongoose from 'mongoose'
 const postSchema = mongoose.Schema({
-    creator:String,
-    creatorName: String,
+    creatorName:String,
+    googleId: String,
     name : String,
-    eventDate :String,
-    message :String,
+    date :String,
+    age :Number,
     phone :String,
-    eventType:String,
-    selectedFile : String,
-    likes :{
-        type:[String],
-        default:[],
-    },
-    createdAt:{
-        type : Date,
-        default : new Date()
-    }
+    Schedule:Number,
 });
 
 const postEvent = mongoose.model('PostEvent',postSchema);

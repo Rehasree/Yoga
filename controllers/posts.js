@@ -14,7 +14,9 @@ export const  getPosts = async (req,res)=>{
 
 export const createPosts=async (req,res)=>{
     const post = req.body;
-    const newPost = new postEvent({ ...post, creator: req.userId, createdAt: new Date().toISOString()});
+    console.log("backenddata",post)
+    const newPost = new postEvent({ ...post, creator: req.userId});
+    console.log("backenddata2",newPost)
    try {
        await newPost.save();
        res.status(201).json(newPost)
@@ -24,9 +26,12 @@ export const createPosts=async (req,res)=>{
 }
 
 export const updatePost = async(req,res)=>{
-    const { id } = req.params;  
-    const post = req.body;
-    const final = await postEvent.findByIdAndUpdate(id,post.postData ,{new:true});
+    const { id } = req.params; 
+    console.log('id',id) 
+    const post = req?.body;
+    console.log('backend',post)
+    const final = await postEvent.findByIdAndUpdate(id,post ,{new:true});
+    console.log('backendfinal',final)
     res.status(200).json(final);
 }
 

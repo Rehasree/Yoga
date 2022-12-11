@@ -12,11 +12,7 @@ import { getPosts  } from './actions/posts';
 // JS Components
 import Base from './Components/constants/Base/Base';
 import Home from './Pages/Home/home'
-import Anniversaries from './Pages/Anniversaries/Anniversaries'
-import  Babybirthdays from './Pages/Birthdays/BabyBirthdays';
-import Adultbirthdays from './Pages/Birthdays/AdultBirthDays';
-import PostEvent  from './Pages/PostEvents/PostEvents';
-import Authentication from './Pages/Auth/Auth';
+import Registration from './Pages/Registration/Registration';
 
 function App() {
  const [currentID,setCurrentId] = useState(null);
@@ -33,28 +29,10 @@ function App() {
               <Home/>
           </Base>
           </Route>
-          <Route exact path="/anniversaries" >
+          <Route exact path="/Registration" >
           <Base> 
-              <Anniversaries currentID={currentID} setCurrentId={setCurrentId}/>
+              <Registration currentID={currentID} setCurrentId={setCurrentId}/>
           </Base>
-          </Route>
-          <Route exact path="/baby-birthdays">
-          <Base> 
-              <Babybirthdays  currentID={currentID} setCurrentId={setCurrentId}/>
-          </Base>
-          </Route>
-          <Route exact path="/adult-birthdays">
-          <Base> 
-              <Adultbirthdays  currentID={currentID} setCurrentId={setCurrentId}/>
-          </Base>
-          </Route>
-          <Route exact path="/post-events" >
-          <Base> 
-              <PostEvent currentID={currentID} setCurrentId={setCurrentId}/>
-          </Base>
-          </Route>
-          <Route exact path="/auth">
-              <Authentication/>
           </Route>
         </Switch>
       </Router>

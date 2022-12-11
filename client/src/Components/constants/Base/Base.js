@@ -49,7 +49,7 @@ export default class Base extends Component {
     }
       return (
         <div>
-            <ParticlesBg className="particles" type="custom" config={config} bg={true}> </ParticlesBg>   
+            {/* <ParticlesBg className="particles" type="custom" config={config} bg={true}> </ParticlesBg>    */}
             <Navbarr />
             <div style={{minHeight:"90vh"}} >
               {this.props.children}
