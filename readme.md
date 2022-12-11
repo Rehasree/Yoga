@@ -14,7 +14,8 @@
 #Work flow
 ![workflow](./assets/workflow.png "a title")
 
-<a name="Tech></a>
+<a name="Tech"></a>
+#Technologies Used
 - MongoDB(Backend)
 - Nodejs(Backend)
 - React js
@@ -23,7 +24,8 @@
 - React-bootstrap
 - Express.js
 
-<a name="Er></a>
+<a name="Er"></a>
+#ER Diagram
 
 <a name="run"></a>
 #How to run the code
