@@ -28,6 +28,10 @@
 # ER Diagram
 ![er](./assets/ER.png "a title")
 <a name="run"></a>
+
+# Cloud Architecture
+![cloud](./assets/carc.jpeg "a title")
+
 # How to run the code
 
 ```
