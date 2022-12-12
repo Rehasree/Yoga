@@ -11,11 +11,11 @@
 - [Run](#run)
 
 <a name="struc"></a>
-#Work flow
+# Work flow
 ![workflow](./assets/workflow.png "a title")
 
 <a name="Tech"></a>
-#Technologies Used
+# Technologies Used
 - MongoDB(Backend)
 - Nodejs(Backend)
 - React js
@@ -25,10 +25,10 @@
 - Express.js
 
 <a name="Er"></a>
-#ER Diagram
-
+# ER Diagram
+![er](./assets/ER.png "a title")
 <a name="run"></a>
-#How to run the code
+# How to run the code
 
 ```
 Open the Source code folder and open hire book code in your editor and 
