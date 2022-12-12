@@ -31,8 +31,11 @@
 # How to run the code
 
 ```
-Open the Source code folder and open hire book code in your editor and 
-$ npm i
+Open the Source code folder and open root code in your editor and 
+$ npm i (install backend dependencies)
+$ cd client
+$ npm i (install frontend dependencies)
+$ cd.. (go back to root dir)
 $ npm run dev ..
 Open localhost:3000 and to find the magic
 
